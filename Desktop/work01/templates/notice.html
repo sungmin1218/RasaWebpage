@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>공지사항 - 커리하우스</title>
+
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --accent:#ff8a00;
+      --muted:#6b7280;
+      --shadow: 0 6px 18px rgba(16,24,40,0.08);
+      --radius:16px;
+      --max-width:1200px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", "Helvetica", "Arial", sans-serif;
+      background:var(--bg);
+      color:#111827;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .container{
+      max-width:var(--max-width);
+      margin:28px auto;
+      padding:0 20px 60px;
+    }
+
+    /* HERO */
+    .hero{
+      text-align:center;
+      margin-bottom:22px;
+    }
+    .hero h1{
+      margin:0;
+      font-size:28px;
+      letter-spacing:-0.4px;
+    }
+    .hero p{
+      margin:8px 0 0;
+      color:var(--muted);
+    }
+
+    /* Search */
+    .search-wrap{
+      display:flex;
+      justify-content:center;
+      margin:18px 0 28px;
+    }
+    .search{
+      width:100%;
+      max-width:640px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:white;
+      padding:10px 14px;
+      border-radius:999px;
+      box-shadow: 0 4px 12px rgba(2,6,23,0.06);
+      border:1px solid rgba(15,23,42,0.03);
+    }
+    .search input{
+      border:0;
+      outline:0;
+      font-size:15px;
+      width:100%;
+    }
+    .search .icon{
+      width:18px;height:18px;opacity:.7;
+    }
+
+    /* Grid */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(1,1fr);
+      gap:22px;
+      align-items:stretch;
+    }
+    @media(min-width:640px){ .grid{ grid-template-columns:repeat(2,1fr);} }
+    @media(min-width:992px){ .grid{ grid-template-columns:repeat(3,1fr);} }
+
+    /* Card */
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+      transition:transform .22s ease, box-shadow .22s ease;
+      cursor:pointer;
+      min-height:360px;
+    }
+    .card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 18px 40px rgba(16,24,40,0.12);
+    }
+    .card .thumb{
+      height:180px;
+      width:100%;
+      background:#ddd;
+      overflow:hidden;
+    }
+    .card .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transform:scale(1);
+      transition:transform .45s ease;
+    }
+    .card:hover .thumb img{ transform:scale(1.06); }
+
+    .card .body{
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      flex:1;
+    }
+
+    .tag{
+      display:inline-block;
+      font-size:12px;
+      color:var(--accent);
+      background:rgba(255,138,0,0.08);
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:600;
+      width:max-content;
+    }
+
+    .title{
+      font-size:18px;
+      margin:0;
+      line-height:1.25;
+      overflow:hidden;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+    }
+
+    .preview{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+      overflow:hidden;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+    }
+
+    .meta{
+      margin-top:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .meta .views{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 8px;
+      border-radius:999px;
+      background:rgba(16,24,40,0.03);
+    }
+
+    /* featured (large) */
+    .featured{
+      background:linear-gradient(90deg, rgba(255,138,0,0.12), rgba(255,211,128,0.06));
+      border-radius:16px;
+      padding:18px;
+      display:flex;
+      gap:16px;
+      align-items:center;
+      margin-bottom:18px;
+      box-shadow:0 6px 18px rgba(255,138,0,0.06);
+    }
+    .featured .info{ flex:1; }
+    .featured h3{ margin:0;font-size:20px; }
+    .featured p{ margin:6px 0 0; color:var(--muted); }
+
+    .featured .thumb{
+      width:180px;
+      height:110px;
+      border-radius:12px;
+      overflow:hidden;
+      flex-shrink:0;
+    }
+
+    /* footer */
+    .footer{
+      text-align:center;
+      margin-top:34px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* small helpers */
+    .btn{
+      background:var(--accent);
+      color:white;
+      padding:10px 14px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+      <h1>📢 커리하우스 공지</h1>
+      <p>최근 업데이트, 이벤트, 점검 등 형님 가게 소식을 한눈에 확인하세요.</p>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-wrap">
+      <div class="search" role="search">
+        <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="#374151" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="11" cy="11" r="6" stroke="#374151" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></circle></svg>
+        <input id="q" placeholder="공지 제목으로 검색하세요 (예: 점검, 이벤트)" />
+        <a id="clearBtn" style="display:none; text-decoration:none; color:var(--muted); font-size:13px;">지우기</a>
+      </div>
+    </div>
+
+    <!-- FEATURED -->
+    <div id="featured" class="featured" style="display:none;">
+      <div class="info">
+        <h3 id="featured-title"></h3>
+        <p id="featured-preview"></p>
+        <div style="margin-top:10px;">
+          <span id="featured-date" style="color:var(--muted); font-size:13px;"></span>
+        </div>
+      </div>
+      <div class="thumb">
+        <img id="featured-img" src="" alt="" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+    </div>
+
+    <!-- GRID of notices -->
+    <div id="grid" class="grid">
+      <!-- cards inserted by JS -->
+    </div>
+
+    <div class="footer">
+      © 2025 커리하우스 — 최신 공지는 가게 방문 또는 전화로도 확인 가능합니다.
+    </div>
+  </div>
+
+  <script>
+    // 샘플 공지 데이터 (원하면 서버에서 동적으로 주입)
+    const notices = [
+      {
+        id:1,
+        title:"12월 서비스 업데이트 안내",
+        preview:"메뉴 일부 개선 및 포인트 적립 시스템을 추가했습니다. 첫 방문 고객 10% 할인 이벤트 진행 중!",
+        date:"2025-12-01",
+        views:210,
+        tag:"업데이트",
+        img:"static/images/curry.png",
+        featured:true
+      },
+      {
+        id:3,
+        title:"신규 이벤트 오픈!",
+        preview:"SNS 공유만 해도 음료 무료 쿠폰을 드립니다. 참여 방법은 공지 본문을 확인하세요.",
+        date:"2025-11-28",
+        views:129,
+        tag:"이벤트",
+        img:"static/images/new.png"
+      },
+      {
+        id:4,
+        title:"연말 특별 메뉴 출시",
+        preview:"크리스마스 한정 스페셜 카레가 출시됩니다. 수량 한정이니 서둘러 주세요!",
+        date:"2025-11-20",
+        views:94,
+        tag:"이벤트",
+        img:"static/images/christmas.png"
+      },
+      {
+        id:5,
+        title:"정기 휴무 안내",
+        preview:"매주 월요일은 정기 휴무입니다. 공휴일 경우 운영 여부는 별도 공지합니다.",
+        date:"2025-10-10",
+        views:502,
+        tag:"공지",
+        img:"static/images/break.png"
+      }
+    ];
+
+    const grid = document.getElementById('grid');
+    const q = document.getElementById('q');
+    const clearBtn = document.getElementById('clearBtn');
+
+    function renderList(list){
+      grid.innerHTML = '';
+      // If any featured, show the first featured above
+      const featured = list.find(n => n.featured);
+      const featuredBox = document.getElementById('featured');
+      if(featured){
+        document.getElementById('featured-title').innerText = featured.title;
+        document.getElementById('featured-preview').innerText = featured.preview;
+        document.getElementById('featured-date').innerText = featured.date + " • 조회 " + featured.views;
+        document.getElementById('featured-img').src = featured.img;
+        featuredBox.style.display = 'flex';
+      } else {
+        featuredBox.style.display = 'none';
+      }
+
+      // non-featured items
+      const items = list.filter(n => !n.featured);
+      if(items.length === 0){
+        grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#6b7280;">검색 결과가 없습니다.</p>';
+        return;
+      }
+
+      items.forEach(n => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="thumb"><img src="${n.img}" alt="${escapeHtml(n.title)}"></div>
+          <div class="body">
+            <span class="tag">#${escapeHtml(n.tag)}</span>
+            <h3 class="title">${escapeHtml(n.title)}</h3>
+            <p class="preview">${escapeHtml(n.preview)}</p>
+            <div class="meta">
+              <span class="date">${n.date}</span>
+              <span class="views">👁️ ${n.views}</span>
+            </div>
+          </div>
+        `;
+        // 클릭 시 상세 페이지로 이동(예: /notice/ID)
+        card.addEventListener('click', () => {
+          // 예: Flask route -> /notice/1
+          // window.location.href = `/notice/${n.id}`;
+          // 현재는 모달 대신 alert로 미리보기
+          openDetail(n);
+        });
+        grid.appendChild(card);
+      });
+    }
+
+    // escape helper
+    function escapeHtml(text){
+      const map = { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;" };
+      return String(text).replace(/[&<>"']/g, m => map[m]);
+    }
+
+    function openDetail(n){
+      // 간단한 모달 대체 (브라우저 native)
+      const detail = `
+${n.title}
+${n.date} • 조회 ${n.views}
+
+${n.preview}
+
+(자세한 공지 본문은 가게 관리자 페이지에서 작성)
+      `;
+      alert(detail);
+      // 실제 서비스면 window.location.href = `/notice/${n.id}` 로 상세 라우트로 이동.
+    }
+
+    // 검색
+    q.addEventListener('input', () => {
+      const val = q.value.trim().toLowerCase();
+      clearBtn.style.display = val ? 'inline' : 'none';
+      const filtered = notices.filter(n => 
+        n.title.toLowerCase().includes(val) || n.tag.toLowerCase().includes(val) || n.preview.toLowerCase().includes(val)
+      );
+      renderList(filtered);
+    });
+
+    clearBtn.addEventListener('click', () => {
+      q.value = '';
+      clearBtn.style.display = 'none';
+      renderList(notices);
+    });
+
+    // 초기 렌더
+    renderList(notices);
+  </script>
+</body>
+</html>

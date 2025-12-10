@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>메뉴 - 커리하우스</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header class="page-header">
+    <h1>🍛 메뉴</h1>
+    <p>정성으로 만든 커리하우스의 메뉴들을 소개합니다</p>
+</header>
+
+<div class="menu-container">
+
+    <div class="menu-card">
+        <img src="{{ url_for('static', filename='images/curry1.png') }}" alt="키마 커리">
+        <h2>키마 커리</h2>
+        <p class="price">10,000원</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="{{ url_for('static', filename='images/curry2.png') }}" alt="치킨 커리">
+        <h2>치킨 커리</h2>
+        <p class="price">10,000원</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="{{ url_for('static', filename='images/curry3.png') }}" alt="하이라이스">
+        <h2>하이라이스</h2>
+        <p class="price">10,000원</p>
+    </div>
+
+    <div class="menu-card">
+        <img src="{{ url_for('static', filename='images/curry4.png') }}" alt="콤보 커리">
+        <h2>콤보 커리</h2>
+        <p class="price">13,000원</p>
+    </div>
+
+</div>
+
+<footer>
+    <a href="/" class="back-btn">⬅ 홈으로</a>
+</footer>
+
+</body>
+</html>

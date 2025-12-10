@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>라사 커리하우스</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+      
+<header>
+    <h1>🍛 라사 커리하우스</h1>
+    <p>따뜻한 정성으로 만드는 집밥 같은 카레 전문점</p>
+</header>
+
+<section class="hero">
+    <img src="{{ url_for('static', filename='images/curry.png') }}" alt="가게 사진">
+</section>
+
+<section class="menu">
+    <h2>📋 메뉴</h2>
+    <ul>
+        <li>키마 커리 — 10,000원</li>
+        <li>치킨 커리 — 10,000원</li>
+        <li>하이라이스 — 10,000원</li>
+        <li>콤보 커리 — 13,000원</li>
+    </ul>
+    <a href="/menu" class="back-btn">메뉴 자세히보기</a>
+</section>
+
+<section class="notice">
+    <a href="/notice">
+        <h2>✅ 공지</h2>
+    </a>
+</section>
+
+
+<section class="info">
+    <h2>🕒 영업시간</h2>
+    <p>매일 11:00 ~ 21:00 (브레이크타임 15:00~17:00)</p>
+
+    <h2>📍 위치</h2>
+    <p>서울 ○○구 ○○로 123</p>
+</section>
+
+<section class="contact">
+    <a href="tel:010-1234-5678" class="call-btn">📞 전화하기</a>
+</section>
+
+<footer>
+    <p>© 2025 커리하우스</p>
+</footer>
+
+</body>
+</html>
