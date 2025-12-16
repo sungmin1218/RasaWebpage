@@ -29,12 +29,12 @@ Python의 경량 웹 프레임워크인 Flask를 사용하여 구축되어있으
 
 📂 Directory Structure
 📦 CurryHouse-Project
- ┣ 📂 static
- ┃ ┣ 📂 images        # 메뉴 및 매장 이미지 
- ┃ ┗ 📜 style.css     # 공통 스타일시트
- ┣ 📂 templates       # HTML 파일 모음
- ┃ ┣ 📜 index.html
- ┃ ┣ 📜 menu.html
- ┃ ┣ 📜 notice.html
- ┃ ┗ 📜 location.html
- ┣ 📜 app.py          # Flask 실행 파일
+  📂 static
+  📂 images        # 메뉴 및 매장 이미지 
+   📜 style.css     # 공통 스타일시트
+  📂 templates       # HTML 파일 모음
+   📜 index.html
+   📜 menu.html
+   📜 notice.html
+   📜 location.html
+  📜 app.py          # Flask 실행 파일
