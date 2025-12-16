@@ -28,8 +28,11 @@ Python의 경량 웹 프레임워크인 Flask를 사용하여 구축되어있으
 
 
 📂 Directory Structure
+
 📦 CurryHouse-Project
+
   📂 static
+  
   📂 images        # 메뉴 및 매장 이미지 
    📜 style.css     # 공통 스타일시트
   
