@@ -25,7 +25,7 @@ Python의 경량 웹 프레임워크인 Flask를 사용하여 구축되어있으
 
 4.위치 안내 
 - Google Maps Embed API를 활용한 매장 위치 지도 표시
-- 반응형 지도 컨테이너 적용
+
 
 📂 Directory Structure
 📦 CurryHouse-Project
